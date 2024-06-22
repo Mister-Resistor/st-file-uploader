@@ -30,5 +30,5 @@ if uploaded_file is not None:
     st.write(file_path)
     with open(file_path, "rb") as f:
         base64_pdf = base64.b64encode(f.read()).decode('utf-8')
-    pdf_display = f'<iframe src="https://media.geeksforgeeks.org/wp-content/cdn-uploads/20210101201653/PDF.pdf" width="800" height="500"></iframe>'
+    pdf_display = f'<object class="pdf" data="https://media.geeksforgeeks.org/wp-content/cdn-uploads/20210101201653/PDF.pdf" width="800" height="500"></object>'
     st.markdown(pdf_display, unsafe_allow_html=True)
