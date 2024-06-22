@@ -14,7 +14,7 @@ for uploaded_file in uploaded_files:
     st.write("filename:", uploaded_file.name)
     base64_pdf = base64.b64encode(bytes_data).decode('utf-8')
     
-    pdf_viewer("https://www.catan.com/sites/default/files/2021-06/catan_base_rules_2020_200707.pdf")
+    pdf_viewer(input=uploaded_file)
 
     
     # pdf_display = F'<iframe src="data:application/pdf;base64,{base64_pdf}" width="700" height="1000" type="application/pdf"></iframe>'
