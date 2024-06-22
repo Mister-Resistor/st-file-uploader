@@ -1,35 +1,16 @@
-import streamlit as st
-import os
 import base64
-from pathlib import Path
-from streamlit_pdf_viewer import pdf_viewer
+import streamlit as st
 
-# Directory to save uploaded files
-UPLOAD_DIR = "uploads"
-Path(UPLOAD_DIR).mkdir(exist_ok=True)
 
-st.title("PDF Upload and Viewer")
+uploaded_files = st.file_uploader(
+    "Choose a PDF file",
+    accept_multiple_files=True,
+    type=['pdf']
+)
+for uploaded_file in uploaded_files:
+    bytes_data = uploaded_file.read()
 
-# File uploader
-uploaded_file = st.file_uploader("Upload a PDF file", type=["pdf"])
-
-if uploaded_file is not None:
-    # Save uploaded file
-    file_path = os.path.join(UPLOAD_DIR, uploaded_file.name)
-    with open(file_path, "wb") as f:
-        f.write(uploaded_file.getbuffer())
-    st.success(f"File saved at {file_path}")
-
-    # Display file
-    st.write("File Preview:")
-    st.download_button(
-        label="Download PDF",
-        data=open(file_path, "rb"),
-        file_name=uploaded_file.name,
-        mime="application/pdf"
-    )
-    st.write(file_path)
-    with open(file_path, "rb") as f:
-        base64_pdf = base64.b64encode(f.read()).decode('utf-8')
-    pdf_viewer(input="https://media.geeksforgeeks.org/wp-content/cdn-uploads/20210101201653/PDF.pdf")
-
+    st.write("filename:", uploaded_file.name)
+    base64_pdf = base64.b64encode(bytes_data).decode('utf-8')
+    pdf_display = F'<iframe src="data:application/pdf;base64,{base64_pdf}" width="700" height="1000" type="application/pdf"></iframe>'
+    st.markdown(pdf_display, unsafe_allow_html=True)
