@@ -14,3 +14,7 @@ for uploaded_file in uploaded_files:
     base64_pdf = base64.b64encode(bytes_data).decode('utf-8')
     pdf_display = F'<iframe src="data:application/pdf;base64,{base64_pdf}" width="700" height="1000" type="application/pdf"></iframe>'
     st.markdown(pdf_display, unsafe_allow_html=True)
+
+
+catan_display = F'<iframe src="https://www.catan.com/sites/default/files/2021-06/catan_base_rules_2020_200707.pdf" width="1000" height="1000" type="application/pdf"></iframe>'
+st.markdown(catan_display, unsafe_allow_html=True)
